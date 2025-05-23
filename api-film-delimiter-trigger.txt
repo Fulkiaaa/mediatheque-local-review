@@ -1,0 +1,95 @@
+-- 1. Création de la table version
+CREATE TABLE version (
+  id INT PRIMARY KEY DEFAULT 1,
+  numero_version INT NOT NULL DEFAULT 1
+);
+
+-- Initialisation
+INSERT INTO version (id, numero_version) VALUES (1, 1);
+
+-- 2. Création de la procédure pour incrémenter la version
+DELIMITER //
+
+CREATE PROCEDURE incrementer_version()
+BEGIN
+  UPDATE version SET numero_version = numero_version + 1 WHERE id = 1;
+END //
+
+-- 3. Création des triggers
+
+-- FILMS
+CREATE TRIGGER after_insert_films
+AFTER INSERT ON films
+FOR EACH ROW
+BEGIN
+  CALL incrementer_version();
+END //
+
+CREATE TRIGGER after_update_films
+AFTER UPDATE ON films
+FOR EACH ROW
+BEGIN
+  CALL incrementer_version();
+END //
+
+-- ACTEURS
+CREATE TRIGGER after_insert_acteurs
+AFTER INSERT ON acteurs
+FOR EACH ROW
+BEGIN
+  CALL incrementer_version();
+END //
+
+CREATE TRIGGER after_update_acteurs
+AFTER UPDATE ON acteurs
+FOR EACH ROW
+BEGIN
+  CALL incrementer_version();
+END //
+
+-- GENRES
+CREATE TRIGGER after_insert_genres
+AFTER INSERT ON genres
+FOR EACH ROW
+BEGIN
+  CALL incrementer_version();
+END //
+
+CREATE TRIGGER after_update_genres
+AFTER UPDATE ON genres
+FOR EACH ROW
+BEGIN
+  CALL incrementer_version();
+END //
+
+-- REALISATEURS
+CREATE TRIGGER after_insert_realisateurs
+AFTER INSERT ON realisateurs
+FOR EACH ROW
+BEGIN
+  CALL incrementer_version();
+END //
+
+CREATE TRIGGER after_update_realisateurs
+AFTER UPDATE ON realisateurs
+FOR EACH ROW
+BEGIN
+  CALL incrementer_version();
+END //
+
+-- SUPPORT
+CREATE TRIGGER after_insert_support
+AFTER INSERT ON support
+FOR EACH ROW
+BEGIN
+  CALL incrementer_version();
+END //
+
+CREATE TRIGGER after_update_support
+AFTER UPDATE ON support
+FOR EACH ROW
+BEGIN
+  CALL incrementer_version();
+END //
+
+DELIMITER ;
