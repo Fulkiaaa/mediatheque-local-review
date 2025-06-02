@@ -1,0 +1,108 @@
+{
+    "films": [
+        {
+            "film_id": 2,
+            "titre": "Tenet",
+            "synopsis": "Un agent voyage \u00e0 travers le temps pour sauver le monde.",
+            "annee": 2020,
+            "duree": 150,
+            "genre": "Action",
+            "realisateur_nom": "Nolan",
+            "realisateur_prenom": "Christopher",
+            "support_type": "DVD",
+            "numero_serie": "DVD789654",
+            "numero_version": 7,
+            "date_version": "2025-06-02",
+            "acteurs": [
+                {
+                    "nom": "Washington",
+                    "prenom": "Denzel",
+                    "date_naissance": "1954-12-28",
+                    "date_deces": null
+                }
+            ]
+        },
+        {
+            "film_id": 6,
+            "titre": "Drole de vie",
+            "synopsis": "Sur ma dr\u00f4le de vie",
+            "annee": 2025,
+            "duree": 125,
+            "genre": "Science-fiction",
+            "realisateur_nom": "Nolan",
+            "realisateur_prenom": "Christopher",
+            "support_type": "Blu-ray",
+            "numero_serie": "BR123456",
+            "numero_version": 7,
+            "date_version": "2025-06-02",
+            "acteurs": []
+        },
+        {
+            "film_id": 8,
+            "titre": "azerty",
+            "synopsis": "aazerrttsscsssss",
+            "annee": 2025,
+            "duree": 165,
+            "genre": "Science-fiction",
+            "realisateur_nom": "Nolan",
+            "realisateur_prenom": "Christopher",
+            "support_type": "Blu-ray",
+            "numero_serie": "BR123456",
+            "numero_version": 7,
+            "date_version": "2025-06-02",
+            "acteurs": []
+        },
+        {
+            "film_id": 9,
+            "titre": "nhjhhfff99",
+            "synopsis": "hhh",
+            "annee": 2025,
+            "duree": 145,
+            "genre": "Science-fiction",
+            "realisateur_nom": "Nolan",
+            "realisateur_prenom": "Christopher",
+            "support_type": "Blu-ray",
+            "numero_serie": "BR123456",
+            "numero_version": 7,
+            "date_version": "2025-06-02",
+            "acteurs": []
+        },
+        {
+            "film_id": 10,
+            "titre": "poiuytre",
+            "synopsis": "poiuyt",
+            "annee": 2025,
+            "duree": 145,
+            "genre": "Science-fiction",
+            "realisateur_nom": "Nolan",
+            "realisateur_prenom": "Christopher",
+            "support_type": "Blu-ray",
+            "numero_serie": "BR123456",
+            "numero_version": 7,
+            "date_version": "2025-06-02",
+            "acteurs": []
+        },
+        {
+            "film_id": 3,
+            "titre": "Dune",
+            "synopsis": "Un jeune h\u00e9ritier d\u00e9couvre un destin li\u00e9 \u00e0 une plan\u00e8te dangereuse.",
+            "annee": 2021,
+            "duree": 155,
+            "genre": "Science-fiction",
+            "realisateur_nom": "Villeneuve",
+            "realisateur_prenom": "Denis",
+            "support_type": "Blu-ray",
+            "numero_serie": "BR123456",
+            "numero_version": 7,
+            "date_version": "2025-06-02",
+            "acteurs": [
+                {
+                    "nom": "Ferguson",
+                    "prenom": "Rebecca",
+                    "date_naissance": "1983-10-19",
+                    "date_deces": null
+                }
+            ]
+        }
+    ]
+}
