@@ -1,6 +1,11 @@
 <?php
 // register.php - Page d'inscription
 session_start();
+// Redirection vers la page de connexion - inscription désactivée
+header('Location: login.php');
+exit;
+
+//-- non accessible (garder pour référence et le cheminement du projet pour correction éventuelle du prof) --
 require 'db.php';
 
 $message = '';
