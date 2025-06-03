@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 03 juin 2025 à 13:00
+-- Généré le : mar. 03 juin 2025 à 13:14
 -- Version du serveur : 8.2.0
 -- Version de PHP : 8.1.26
 
@@ -46,7 +46,7 @@ INSERT INTO `acteurs` (`id`, `nom`, `prenom`, `date_naissance`, `date_deces`) VA
 (2, 'Page', 'Elliot', '1987-02-21', NULL),
 (3, 'Washington', 'Denzel', '1954-12-28', NULL),
 (4, 'Ferguson', 'Rebecca', '1983-10-19', NULL),
-(5, 'MORIN', 'Clara', '2000-02-09', '0000-00-00'),
+(5, 'MORINO', 'Clara', '2000-02-09', '0000-00-00'),
 (6, 'MORIN', 'Owen', '2011-04-09', '0000-00-00');
 
 -- --------------------------------------------------------
@@ -238,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `version` (
 --
 
 INSERT INTO `version` (`id`, `numero_version`, `date_version`) VALUES
-(1, 18, '2025-06-03');
+(1, 19, '2025-06-03');
 
 --
 -- Contraintes pour les tables déchargées

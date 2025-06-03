@@ -11,7 +11,7 @@
             "realisateur_prenom": "Denis",
             "support_type": "Blu-ray",
             "numero_serie": "BR123456",
-            "numero_version": 14,
+            "numero_version": 19,
             "date_version": "2025-06-03",
             "acteurs": [
                 {
@@ -33,11 +33,11 @@
             "realisateur_prenom": "Christopher",
             "support_type": "Blu-ray",
             "numero_serie": "BR123456",
-            "numero_version": 14,
+            "numero_version": 19,
             "date_version": "2025-06-03",
             "acteurs": [
                 {
-                    "nom": "MORIN",
+                    "nom": "MORINO",
                     "prenom": "Clara",
                     "date_naissance": "2000-02-09",
                     "date_deces": "0000-00-00"
@@ -55,7 +55,7 @@
             "realisateur_prenom": "Christopher",
             "support_type": "DVD",
             "numero_serie": "DVD789654",
-            "numero_version": 14,
+            "numero_version": 19,
             "date_version": "2025-06-03",
             "acteurs": [
                 {
