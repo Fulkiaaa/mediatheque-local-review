@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 02 juin 2025 à 08:27
+-- Généré le : mar. 03 juin 2025 à 10:45
 -- Version du serveur : 8.2.0
 -- Version de PHP : 8.1.26
 
@@ -18,19 +18,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `api-film`
+-- Base de données : `films_db`
 --
-
-DELIMITER $$
---
--- Procédures
---
-DROP PROCEDURE IF EXISTS `incrementer_version`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `incrementer_version` ()   BEGIN
-  UPDATE version SET numero_version = numero_version + 1 WHERE id = 1;
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -41,38 +30,24 @@ DELIMITER ;
 DROP TABLE IF EXISTS `acteurs`;
 CREATE TABLE IF NOT EXISTS `acteurs` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `nom` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `prenom` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `date_naissance` date DEFAULT NULL,
   `date_deces` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `acteurs`
 --
 
-INSERT INTO `acteurs` (`id`, `nom`, `date_naissance`, `date_deces`) VALUES
-(1, 'Leonardo DiCaprio', '1974-11-11', NULL),
-(2, 'Meryl Streep', '1949-06-22', NULL),
-(3, 'Heath Ledger', '1979-04-04', '2008-01-22');
-
---
--- Déclencheurs `acteurs`
---
-DROP TRIGGER IF EXISTS `after_insert_acteurs`;
-DELIMITER $$
-CREATE TRIGGER `after_insert_acteurs` AFTER INSERT ON `acteurs` FOR EACH ROW BEGIN
-  CALL incrementer_version();
-END
-$$
-DELIMITER ;
-DROP TRIGGER IF EXISTS `after_update_acteurs`;
-DELIMITER $$
-CREATE TRIGGER `after_update_acteurs` AFTER UPDATE ON `acteurs` FOR EACH ROW BEGIN
-  CALL incrementer_version();
-END
-$$
-DELIMITER ;
+INSERT INTO `acteurs` (`id`, `nom`, `prenom`, `date_naissance`, `date_deces`) VALUES
+(1, 'DiCaprio', 'Leonardo', '1974-11-11', NULL),
+(2, 'Page', 'Elliot', '1987-02-21', NULL),
+(3, 'Washington', 'Denzel', '1954-12-28', NULL),
+(4, 'Ferguson', 'Rebecca', '1983-10-19', NULL),
+(5, 'MORIN', 'Clara', '2000-02-09', '0000-00-00'),
+(6, 'MORIN', 'Owen', '2011-04-09', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -83,16 +58,11 @@ DELIMITER ;
 DROP TABLE IF EXISTS `avis`;
 CREATE TABLE IF NOT EXISTS `avis` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `film_id` int NOT NULL,
-  `user_id` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `id_film` int DEFAULT NULL,
+  `vu` tinyint(1) DEFAULT NULL,
   `note` tinyint DEFAULT NULL,
-  `vu` tinyint(1) DEFAULT '0',
-  `commentaire` text COLLATE utf8mb4_general_ci,
-  `date_creation` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_modification` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `unique_user_film` (`film_id`,`user_id`),
-  KEY `user_id` (`user_id`)
+  KEY `id_film` (`id_film`)
 ) ;
 
 -- --------------------------------------------------------
@@ -104,68 +74,51 @@ CREATE TABLE IF NOT EXISTS `avis` (
 DROP TABLE IF EXISTS `films`;
 CREATE TABLE IF NOT EXISTS `films` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `titre` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `titre` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `synopsis` text COLLATE utf8mb4_general_ci,
-  `annee` year NOT NULL,
-  `duree` smallint DEFAULT NULL,
-  `support_id` int NOT NULL,
-  `genre_id` int NOT NULL,
-  `realisateur_id` int NOT NULL,
+  `annee` int DEFAULT NULL,
+  `duree` int DEFAULT NULL,
+  `id_genre` int DEFAULT NULL,
+  `id_realisateur` int DEFAULT NULL,
+  `id_support` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `support_id` (`support_id`),
-  KEY `genre_id` (`genre_id`),
-  KEY `realisateur_id` (`realisateur_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  KEY `id_genre` (`id_genre`),
+  KEY `id_realisateur` (`id_realisateur`),
+  KEY `id_support` (`id_support`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `films`
 --
 
-INSERT INTO `films` (`id`, `titre`, `synopsis`, `annee`, `duree`, `support_id`, `genre_id`, `realisateur_id`) VALUES
-(1, 'Inception', 'Un voleur capable d’entrer dans les rêves partage ses connaissances.', '2010', 148, 1, 1, 1),
-(2, 'The Shining', 'Un gardien d’hôtel sombre dans la folie durant l’hiver.', '1980', 146, 2, 2, 2),
-(3, 'Lady Bird', 'Une adolescente en conflit avec sa mère cherche son identité.', '2017', 94, 3, 3, 3);
-
---
--- Déclencheurs `films`
---
-DROP TRIGGER IF EXISTS `after_insert_films`;
-DELIMITER $$
-CREATE TRIGGER `after_insert_films` AFTER INSERT ON `films` FOR EACH ROW BEGIN
-  CALL incrementer_version();
-END
-$$
-DELIMITER ;
-DROP TRIGGER IF EXISTS `after_update_films`;
-DELIMITER $$
-CREATE TRIGGER `after_update_films` AFTER UPDATE ON `films` FOR EACH ROW BEGIN
-  CALL incrementer_version();
-END
-$$
-DELIMITER ;
+INSERT INTO `films` (`id`, `titre`, `synopsis`, `annee`, `duree`, `id_genre`, `id_realisateur`, `id_support`) VALUES
+(2, 'Tenetszszsz', 'Un agent voyage à travers le temps pour sauver le monde.', 2020, 150, 2, 1, 2),
+(3, 'Dune', 'Un jeune héritier découvre un destin lié à une planète dangereuse.', 2021, 155, 1, 2, 1),
+(6, 'Drole de vie', 'Sur ma drôle de vie', 2025, 125, 1, 1, 1),
+(8, 'azerty', 'aazerrttsscsssss', 2025, 165, 2, 2, 2);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `film_acteur`
+-- Structure de la table `films_acteurs`
 --
 
-DROP TABLE IF EXISTS `film_acteur`;
-CREATE TABLE IF NOT EXISTS `film_acteur` (
-  `film_id` int NOT NULL,
-  `acteur_id` int NOT NULL,
-  PRIMARY KEY (`film_id`,`acteur_id`),
-  KEY `acteur_id` (`acteur_id`)
+DROP TABLE IF EXISTS `films_acteurs`;
+CREATE TABLE IF NOT EXISTS `films_acteurs` (
+  `id_film` int NOT NULL,
+  `id_acteur` int NOT NULL,
+  PRIMARY KEY (`id_film`,`id_acteur`),
+  KEY `id_acteur` (`id_acteur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `film_acteur`
+-- Déchargement des données de la table `films_acteurs`
 --
 
-INSERT INTO `film_acteur` (`film_id`, `acteur_id`) VALUES
-(1, 1),
-(3, 2),
-(2, 3);
+INSERT INTO `films_acteurs` (`id_film`, `id_acteur`) VALUES
+(2, 3),
+(3, 4),
+(6, 5);
 
 -- --------------------------------------------------------
 
@@ -178,34 +131,17 @@ CREATE TABLE IF NOT EXISTS `genres` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `genres`
 --
 
 INSERT INTO `genres` (`id`, `nom`) VALUES
-(1, 'Action'),
-(2, 'Drame'),
-(3, 'Comédie');
-
---
--- Déclencheurs `genres`
---
-DROP TRIGGER IF EXISTS `after_insert_genres`;
-DELIMITER $$
-CREATE TRIGGER `after_insert_genres` AFTER INSERT ON `genres` FOR EACH ROW BEGIN
-  CALL incrementer_version();
-END
-$$
-DELIMITER ;
-DROP TRIGGER IF EXISTS `after_update_genres`;
-DELIMITER $$
-CREATE TRIGGER `after_update_genres` AFTER UPDATE ON `genres` FOR EACH ROW BEGIN
-  CALL incrementer_version();
-END
-$$
-DELIMITER ;
+(1, 'Science-fiction'),
+(2, 'Action'),
+(3, 'Drame'),
+(4, 'Horreur');
 
 -- --------------------------------------------------------
 
@@ -216,38 +152,19 @@ DELIMITER ;
 DROP TABLE IF EXISTS `realisateurs`;
 CREATE TABLE IF NOT EXISTS `realisateurs` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `nom` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `prenom` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `date_naissance` date DEFAULT NULL,
-  `date_deces` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `realisateurs`
 --
 
-INSERT INTO `realisateurs` (`id`, `nom`, `date_naissance`, `date_deces`) VALUES
-(1, 'Christopher Nolan', '1970-07-30', NULL),
-(2, 'Stanley Kubrick', '1928-07-26', '1999-03-07'),
-(3, 'Greta Gerwig', '1983-08-04', NULL);
-
---
--- Déclencheurs `realisateurs`
---
-DROP TRIGGER IF EXISTS `after_insert_realisateurs`;
-DELIMITER $$
-CREATE TRIGGER `after_insert_realisateurs` AFTER INSERT ON `realisateurs` FOR EACH ROW BEGIN
-  CALL incrementer_version();
-END
-$$
-DELIMITER ;
-DROP TRIGGER IF EXISTS `after_update_realisateurs`;
-DELIMITER $$
-CREATE TRIGGER `after_update_realisateurs` AFTER UPDATE ON `realisateurs` FOR EACH ROW BEGIN
-  CALL incrementer_version();
-END
-$$
-DELIMITER ;
+INSERT INTO `realisateurs` (`id`, `nom`, `prenom`, `date_naissance`) VALUES
+(1, 'Nolan', 'Christopher', '1970-07-30'),
+(2, 'Villeneuve', 'Denis', '1967-10-03');
 
 -- --------------------------------------------------------
 
@@ -258,8 +175,8 @@ DELIMITER ;
 DROP TABLE IF EXISTS `support`;
 CREATE TABLE IF NOT EXISTS `support` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `type` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `numero_serie` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `type` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `numero_serie` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -268,27 +185,9 @@ CREATE TABLE IF NOT EXISTS `support` (
 --
 
 INSERT INTO `support` (`id`, `type`, `numero_serie`) VALUES
-(1, 'DVD', 'DVD-2025-0001'),
-(2, 'Blu-ray', 'BR-2025-0420'),
-(3, 'Digital', 'DL-2025-1337');
-
---
--- Déclencheurs `support`
---
-DROP TRIGGER IF EXISTS `after_insert_support`;
-DELIMITER $$
-CREATE TRIGGER `after_insert_support` AFTER INSERT ON `support` FOR EACH ROW BEGIN
-  CALL incrementer_version();
-END
-$$
-DELIMITER ;
-DROP TRIGGER IF EXISTS `after_update_support`;
-DELIMITER $$
-CREATE TRIGGER `after_update_support` AFTER UPDATE ON `support` FOR EACH ROW BEGIN
-  CALL incrementer_version();
-END
-$$
-DELIMITER ;
+(1, 'Blu-ray', 'BR123456'),
+(2, 'DVD', 'DVD789654'),
+(3, 'Clé USB', '26288265DF');
 
 -- --------------------------------------------------------
 
@@ -299,17 +198,17 @@ DELIMITER ;
 DROP TABLE IF EXISTS `version`;
 CREATE TABLE IF NOT EXISTS `version` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `numero_version` INT NOT NULL,
+  `numero_version` int NOT NULL,
   `date_version` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `version`
 --
 
 INSERT INTO `version` (`id`, `numero_version`, `date_version`) VALUES
-(1, '1', '2025-05-23');
+(1, 1, '2025-06-03');
 
 --
 -- Contraintes pour les tables déchargées
@@ -319,22 +218,22 @@ INSERT INTO `version` (`id`, `numero_version`, `date_version`) VALUES
 -- Contraintes pour la table `avis`
 --
 ALTER TABLE `avis`
-  ADD CONSTRAINT `avis_ibfk_1` FOREIGN KEY (`film_id`) REFERENCES `films` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `avis_ibfk_1` FOREIGN KEY (`id_film`) REFERENCES `films` (`id`);
 
 --
 -- Contraintes pour la table `films`
 --
 ALTER TABLE `films`
-  ADD CONSTRAINT `films_ibfk_1` FOREIGN KEY (`support_id`) REFERENCES `support` (`id`),
-  ADD CONSTRAINT `films_ibfk_2` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`),
-  ADD CONSTRAINT `films_ibfk_3` FOREIGN KEY (`realisateur_id`) REFERENCES `realisateurs` (`id`);
+  ADD CONSTRAINT `films_ibfk_1` FOREIGN KEY (`id_genre`) REFERENCES `genres` (`id`),
+  ADD CONSTRAINT `films_ibfk_2` FOREIGN KEY (`id_realisateur`) REFERENCES `realisateurs` (`id`),
+  ADD CONSTRAINT `films_ibfk_3` FOREIGN KEY (`id_support`) REFERENCES `support` (`id`);
 
 --
--- Contraintes pour la table `film_acteur`
+-- Contraintes pour la table `films_acteurs`
 --
-ALTER TABLE `film_acteur`
-  ADD CONSTRAINT `film_acteur_ibfk_1` FOREIGN KEY (`film_id`) REFERENCES `films` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `film_acteur_ibfk_2` FOREIGN KEY (`acteur_id`) REFERENCES `acteurs` (`id`) ON DELETE CASCADE;
+ALTER TABLE `films_acteurs`
+  ADD CONSTRAINT `films_acteurs_ibfk_1` FOREIGN KEY (`id_film`) REFERENCES `films` (`id`),
+  ADD CONSTRAINT `films_acteurs_ibfk_2` FOREIGN KEY (`id_acteur`) REFERENCES `acteurs` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
