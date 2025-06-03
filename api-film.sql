@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 03 juin 2025 à 10:45
+-- Généré le : mar. 03 juin 2025 à 13:00
 -- Version du serveur : 8.2.0
 -- Version de PHP : 8.1.26
 
@@ -94,8 +94,7 @@ CREATE TABLE IF NOT EXISTS `films` (
 INSERT INTO `films` (`id`, `titre`, `synopsis`, `annee`, `duree`, `id_genre`, `id_realisateur`, `id_support`) VALUES
 (2, 'Tenetszszsz', 'Un agent voyage à travers le temps pour sauver le monde.', 2020, 150, 2, 1, 2),
 (3, 'Dune', 'Un jeune héritier découvre un destin lié à une planète dangereuse.', 2021, 155, 1, 2, 1),
-(6, 'Drole de vie', 'Sur ma drôle de vie', 2025, 125, 1, 1, 1),
-(8, 'azerty', 'aazerrttsscsssss', 2025, 165, 2, 2, 2);
+(6, 'Drole de vie', 'Sur ma drôle de vie', 2025, 125, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -131,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `genres` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `genres`
@@ -141,7 +140,7 @@ INSERT INTO `genres` (`id`, `nom`) VALUES
 (1, 'Science-fiction'),
 (2, 'Action'),
 (3, 'Drame'),
-(4, 'Horreur');
+(6, 'Horreur');
 
 -- --------------------------------------------------------
 
@@ -192,6 +191,37 @@ INSERT INTO `support` (`id`, `type`, `numero_serie`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `utilisateurs`
+--
+
+DROP TABLE IF EXISTS `utilisateurs`;
+CREATE TABLE IF NOT EXISTS `utilisateurs` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nom_utilisateur` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `mot_de_passe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `nom` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `prenom` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `role` enum('admin') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'admin',
+  `actif` tinyint(1) DEFAULT '1',
+  `date_creation` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `derniere_connexion` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nom_utilisateur` (`nom_utilisateur`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `utilisateurs`
+--
+
+INSERT INTO `utilisateurs` (`id`, `nom_utilisateur`, `email`, `mot_de_passe`, `nom`, `prenom`, `role`, `actif`, `date_creation`, `derniere_connexion`) VALUES
+(4, 'Clara', 'clara@email.com', '$2y$10$jyJd3iRKTTUhXYCp4sAGsOmvk6Y3ZOCfwOB7rjyCLuqSTC6bGtz1u', 'MORIN', 'Clara', 'admin', 1, '2025-06-03 12:47:08', '2025-06-03 12:51:13'),
+(5, 'admin', 'admin@email.com', '$2y$10$w056QyuW63f3u8pyHLU/UuzBoMBrQNgikioq7aJTAt2Hy4dwr2bXi', 'admin', 'admin', 'admin', 1, '2025-06-03 12:49:18', '2025-06-03 12:56:37');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `version`
 --
 
@@ -208,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `version` (
 --
 
 INSERT INTO `version` (`id`, `numero_version`, `date_version`) VALUES
-(1, 1, '2025-06-03');
+(1, 18, '2025-06-03');
 
 --
 -- Contraintes pour les tables déchargées

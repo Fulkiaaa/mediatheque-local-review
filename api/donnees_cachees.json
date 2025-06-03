@@ -11,7 +11,7 @@
             "realisateur_prenom": "Denis",
             "support_type": "Blu-ray",
             "numero_serie": "BR123456",
-            "numero_version": 2,
+            "numero_version": 14,
             "date_version": "2025-06-03",
             "acteurs": [
                 {
@@ -33,7 +33,7 @@
             "realisateur_prenom": "Christopher",
             "support_type": "Blu-ray",
             "numero_serie": "BR123456",
-            "numero_version": 2,
+            "numero_version": 14,
             "date_version": "2025-06-03",
             "acteurs": [
                 {
@@ -55,7 +55,7 @@
             "realisateur_prenom": "Christopher",
             "support_type": "DVD",
             "numero_serie": "DVD789654",
-            "numero_version": 2,
+            "numero_version": 14,
             "date_version": "2025-06-03",
             "acteurs": [
                 {
@@ -65,21 +65,6 @@
                     "date_deces": null
                 }
             ]
-        },
-        {
-            "film_id": 8,
-            "titre": "azerty",
-            "synopsis": "aazerrttsscsssss",
-            "annee": 2025,
-            "duree": 165,
-            "genre": "Action",
-            "realisateur_nom": "Villeneuve",
-            "realisateur_prenom": "Denis",
-            "support_type": "DVD",
-            "numero_serie": "DVD789654",
-            "numero_version": 2,
-            "date_version": "2025-06-03",
-            "acteurs": []
         }
     ]
 }

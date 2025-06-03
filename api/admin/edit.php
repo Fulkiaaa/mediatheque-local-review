@@ -1,5 +1,6 @@
 <?php
 require 'db.php';
+require 'auth.php';
 
 $table = $_GET['table'] ?? null;
 $id = $_GET['id'] ?? null;
