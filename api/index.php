@@ -110,7 +110,7 @@ if (!empty($recherche)) {
         }
         .film-poster {
             height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg,rgb(234, 125, 61) 0%,rgb(247, 188, 121) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
