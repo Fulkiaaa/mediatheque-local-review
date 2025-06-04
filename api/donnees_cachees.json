@@ -11,8 +11,8 @@
             "realisateur_prenom": "Denis",
             "support_type": "Blu-ray",
             "numero_serie": "BR123456",
-            "numero_version": 19,
-            "date_version": "2025-06-03",
+            "numero_version": 20,
+            "date_version": "2025-06-04",
             "acteurs": [
                 {
                     "nom": "Ferguson",
@@ -33,8 +33,8 @@
             "realisateur_prenom": "Christopher",
             "support_type": "Blu-ray",
             "numero_serie": "BR123456",
-            "numero_version": 19,
-            "date_version": "2025-06-03",
+            "numero_version": 20,
+            "date_version": "2025-06-04",
             "acteurs": [
                 {
                     "nom": "MORINO",
@@ -46,7 +46,7 @@
         },
         {
             "film_id": 2,
-            "titre": "Tenetszszsz",
+            "titre": "Tenetszszszeeee",
             "synopsis": "Un agent voyage \u00e0 travers le temps pour sauver le monde.",
             "annee": 2020,
             "duree": 150,
@@ -55,8 +55,8 @@
             "realisateur_prenom": "Christopher",
             "support_type": "DVD",
             "numero_serie": "DVD789654",
-            "numero_version": 19,
-            "date_version": "2025-06-03",
+            "numero_version": 20,
+            "date_version": "2025-06-04",
             "acteurs": [
                 {
                     "nom": "Washington",
